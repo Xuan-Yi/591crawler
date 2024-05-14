@@ -59,7 +59,7 @@ while True:
             diff_set = new_sets - house_sets
             url_set = get_url_from_id(diff_set, prefix = house_prefix)
             print(url_set)
-            line_notify(f"Found new house! [{current_time}]", token = line_token)
+            line_notify(f"Found new house!", token = line_token)
             for url in url_set:
                 status_code = line_notify(url, token = line_token)
                 if status_code != 200:
@@ -69,9 +69,9 @@ while True:
         house_sets = new_sets
         browser.close()
         wait_time(time_sleep)
-    except:
+    except Exception as e:
         browser.close()
         current_time = show_current_time()
-        print(f"Browser Error! [{current_time}]")
-        line_notify(f"Browser Error! [{current_time}]", token = line_token)
+        print(f"Browser Error! [{current_time}]: {e}")
+        line_notify(f"Browser Error! [{current_time}]: {e}", token = line_token)
         break
